@@ -61,20 +61,6 @@
 
 
 
----
-
-## 📋 Table of Contents
-
-1. [News](#news)
-2. [Abstract](#abstract)
-3. [Visualization](#visualization)
-4. [Method Overview](#method-overview)
-5. [Results](#results)
-6. [Citation](#citation)
-7. [Acknowledgements](#acknowledgements)
-
----
-
 ## 📰 News
 
 - **[Coming Soon]** Code release.
@@ -95,8 +81,6 @@ To address this issue, we propose **Echo-Forcing**, a training-free scene-memory
 
 With these designs, Echo-Forcing uniformly supports long-horizon generation, smooth transitions, hard cuts, and long-range scene recall under a bounded cache budget.
 
----
-
 ## 🎬 Visualization
 
 <p align="center">
@@ -110,8 +94,6 @@ With these designs, Echo-Forcing uniformly supports long-horizon generation, smo
 
 
 
----
-
 ## 📊 Results
 
 <p align="center">
@@ -122,10 +104,6 @@ With these designs, Echo-Forcing uniformly supports long-horizon generation, smo
 <p align="center">
   Echo-Forcing improves long-horizon stability and interactive scene control across smooth transition, hard cut, scene recall, and long-video generation.
 </p>
-
----
-
-
 
 ## 📧 Contact
 
