@@ -6,7 +6,7 @@ A Scene Memory Framework for Interactive Long Video Generation
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2602.05293">
+  <a href="https://arxiv.org/abs/xxx">
     <img src="https://img.shields.io/badge/arXiv-Paper-red?style=flat-square" alt="Paper"/>
   </a>
   <a href="https://github.com/mingqiangWu/Echo-Forcing">
