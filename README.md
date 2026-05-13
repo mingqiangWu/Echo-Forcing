@@ -9,7 +9,7 @@ A Scene Memory Framework for Interactive Long Video Generation
   <a href="https://arxiv.org/abs/2602.05293">
     <img src="https://img.shields.io/badge/arXiv-Paper-red?style=flat-square" alt="Paper"/>
   </a>
-  <a href="https://github.com/wlfeng0509/Fast-SAM3D">
+  <a href="https://github.com/mingqiangWu/Echo-Forcing">
     <img src="https://img.shields.io/badge/GitHub-Code-blue?style=flat-square&logo=github" alt="Code"/>
   </a>
 </p>
