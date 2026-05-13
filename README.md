@@ -58,7 +58,7 @@ Echo-Forcing enables training-free interactive long-video generation with preser
 ## 🎬 Visualization
 
 <p align="center">
-  <video src="assets/Titanic.mp4" width="95%" controls></video>
+  <video src="https://github.com/user-attachments/assets/91158ce5-7a18-4f0b-a420-97be84288f22" width="95%" controls></video>
 </p>
 
 <p align="center">
