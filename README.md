@@ -46,7 +46,6 @@ A Scene Memory Framework for Interactive Long Video Generation
   ETH Zürich<br>
   City College of New York, City University of New York
 </p>
----
 
 <p align="center">
   <img src="assets/teaser.png" width="75%" alt="Echo-Forcing Teaser"/>
