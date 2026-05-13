@@ -89,7 +89,7 @@ With these designs, Echo-Forcing uniformly supports long-horizon generation, smo
 ## 🔍 Method Overview
 
 <p align="center">
-  <img src="assets/overview.png" width="80%" alt="Echo-Forcing Teaser"/>
+  <img src="assets/overview.png" width="75%" alt="Echo-Forcing Teaser"/>
 </p>
 
 <p align="center">
@@ -101,7 +101,7 @@ memories during interactive long-video generation.
 ## 📊 Results
 
 <p align="center">
-  <img src="assets/long.png" width="80%" alt="Echo-Forcing Teaser"/>
+  <img src="assets/long.png" width="75%" alt="Echo-Forcing Teaser"/>
 </p>
 
 <p align="center">
@@ -111,7 +111,7 @@ while maintaining competitive inference throughput.
 </p>
 
 <p align="center">
-  <img src="assets/inter.png" width="80%" alt="Echo-Forcing Teaser"/>
+  <img src="assets/inter.png" width="75%" alt="Echo-Forcing Teaser"/>
 </p>
 
 <p align="center">
