@@ -49,7 +49,7 @@ A Scene Memory Framework for Interactive Long Video Generation
 ---
 
 <p align="center">
-  <img src="assets/teaser.png" width="95%" alt="Echo-Forcing Teaser"/>
+  <img src="assets/teaser.png" width="75%" alt="Echo-Forcing Teaser"/>
 </p>
 <p align="center">
 Echo-Forcing enables training-free interactive long-video generation with preserve, recall, and forget scene memories.
