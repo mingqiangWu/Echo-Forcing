@@ -1,5 +1,9 @@
-<h1 align="center">🚀 Echo-Forcing</h1>
-<p align="center"><sub><b>A Scene Memory Framework for Interactive Long Video Generation</b></sub></p>
+<h1 align="center">🎥 Echo-Forcing</h1>
+<p align="center"><sub><b></b></sub></p>
+
+<p align="center">
+A Scene Memory Framework for Interactive Long Video Generation
+</p>
 
 <p align="center">
   <a href="https://arxiv.org/abs/2602.05293">
@@ -31,14 +35,10 @@
     Yongjun Xu<sup>1</sup>
   </strong>
 </div>
-
-
 <p align="center">
   <sup>*</sup> Equal Contribution &nbsp;&nbsp; 
   <sup>✉</sup> Corresponding Authors
 </p>
-
-
 <p align="center">
   State Key Laboratory of AI Safety, Institute of Computing Technology, Chinese Academy of Sciences<br>
   University of Chinese Academy of Sciences<br>
@@ -46,24 +46,30 @@
   ETH Zürich<br>
   City College of New York, City University of New York
 </p>
-
-
 ---
 
 <p align="center">
   <img src="assets/teaser.png" width="95%" alt="Echo-Forcing Teaser"/>
 </p>
-
-
 <p align="center">
-  <strong>Echo-Forcing enables training-free interactive long-video generation with preserve, recall, and forget scene memories.</strong>
+Echo-Forcing enables training-free interactive long-video generation with preserve, recall, and forget scene memories.
 </p>
 
+## 🎬 Visualization
+
+<p align="center">
+  <video src="assets/Titanic.mp4" width="95%" controls></video>
+</p>
+
+<p align="center">
+    <strong>"Interstellar"</strong>
+    :a demo video, with a scene transition every 10 seconds for a total of 6 transitions.
+</p>
 
 
 ## 📰 News
 
-- **[Coming Soon]** Code release.
+- **[2026/05/13]** 🎉 Paper released. Code coming soon.
 
 ---
 
@@ -81,29 +87,42 @@ To address this issue, we propose **Echo-Forcing**, a training-free scene-memory
 
 With these designs, Echo-Forcing uniformly supports long-horizon generation, smooth transitions, hard cuts, and long-range scene recall under a bounded cache budget.
 
-## 🎬 Visualization
+
+
+## 🔍 Method Overview
 
 <p align="center">
-  <video src="assets/demo.mp4" width="95%" controls></video>
+  <img src="assets/overview.png" width="95%" alt="Echo-Forcing Teaser"/>
 </p>
-
 
 <p align="center">
-  <strong>Echo-Forcing supports multiple interactive long-video generation modes, including long-horizon rollout, smooth transition, hard cut, and long-range scene recall.</strong>
+  <strong>Overview of the proposed Echo-Forcing framework. </strong>Our method integrates three scene-
+memory modules to preserve temporal continuity, recall historical scenes, and suppress conflicting
+memories during interactive long-video generation.
 </p>
-
-
 
 ## 📊 Results
 
 <p align="center">
-  <img src="assets/results.png" width="95%" alt="Echo-Forcing Results"/>
+  <img src="assets/long.png" width="95%" alt="Echo-Forcing Teaser"/>
 </p>
-
 
 <p align="center">
-  Echo-Forcing improves long-horizon stability and interactive scene control across smooth transition, hard cut, scene recall, and long-video generation.
+Long-video generation on VBench-Long. We compare Echo-Forcing with training-free
+long-video baselines at 60s and 120s. Echo-Forcing improves visual fidelity and temporal stability
+while maintaining competitive inference throughput.
 </p>
+
+<p align="center">
+  <img src="assets/inter.png" width="95%" alt="Echo-Forcing Teaser"/>
+</p>
+
+<p align="center">
+Interactive video generation. We evaluate smooth transition, hard cut, and scene recall
+under both non-fine-tuned and fine-tuned settings. Echo-Forcing consistently improves prompt
+responsiveness and scene consistency across interaction modes.
+</p>
+
 
 ## 📧 Contact
 
