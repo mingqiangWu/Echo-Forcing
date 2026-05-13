@@ -56,7 +56,9 @@ Echo-Forcing enables training-free interactive long-video generation with preser
 
 ## 🎬 Visualization
 <div align="center">
+  
  https://github.com/user-attachments/assets/91158ce5-7a18-4f0b-a420-97be84288f22
+ 
 <p align="center">
   <strong>"Interstellar"</strong>: a demo video with a scene transition every 10 seconds, for a total of 6 transitions.
 </p>
