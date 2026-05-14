@@ -1,9 +1,5 @@
-<h1 align="center">🎥 Echo-Forcing</h1>
+<h1 align="center">🎥 Echo-Forcing:A Scene Memory Framework for Interactive Long Video Generation</h1>
 <p align="center"><sub><b></b></sub></p>
-
-<p align="center">
-A Scene Memory Framework for Interactive Long Video Generation
-</p>
 
 <p align="center">
   <a href="https://arxiv.org/abs/xxx">
