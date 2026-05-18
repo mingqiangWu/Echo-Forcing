@@ -2,7 +2,7 @@
 <p align="center"><sub><b></b></sub></p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/xxx">
+  <a href="[https://arxiv.org/abs/xxx](https://arxiv.org/html/2605.16003v1)">
     <img src="https://img.shields.io/badge/arXiv-Paper-red?style=flat-square" alt="Paper"/>
   </a>
   <a href="https://github.com/mingqiangWu/Echo-Forcing">
