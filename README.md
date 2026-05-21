@@ -199,7 +199,7 @@ python inference.py \
     --end_idx 1
 ```
 
-Scene-recall frame:
+Scene-recall:
 
 ```bash
 python inference.py \
