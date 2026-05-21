@@ -1,13 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<h1 align="center">🎬 Echo-Forcing: A Scene Memory Framework for Interactive Long Video Generation</h1>
-=======
-=======
->>>>>>> 1e33823e22886da2f6dcf538c692b197ff2a60cf
 <h1 align="center">🎥 Echo-Forcing:A Scene Memory Framework for Interactive Long Video Generation</h1>
 <p align="center"><sub><b></b></sub></p>
->>>>>>> 1e33823e22886da2f6dcf538c692b197ff2a60cf
-
 <p align="center">
   <a href="https://arxiv.org/html/2605.16003v1">
     <img src="https://img.shields.io/badge/arXiv-Paper-red?style=flat-square" alt="Paper"/>
@@ -15,7 +7,11 @@
   <a href="https://github.com/mingqiangWu/Echo-Forcing">
     <img src="https://img.shields.io/badge/GitHub-Code-blue?style=flat-square&logo=github" alt="Code"/>
   </a>
+  <a href="https://huggingface.co/papers/2605.16003">
+    <img src="https://img.shields.io/badge/Hugging%20Face-Papers-yellow?style=flat-square&logo=huggingface" alt="Hugging Face Papers"/>
+  </a>
 </p>
+
 
 <div align="center">
   <strong>
@@ -59,8 +55,6 @@
 <p align="center">
 Echo-Forcing enables training-free interactive long-video generation with preserve, recall, and forget scene memories.
 </p>
-
-<<<<<<< HEAD
 ## 🎥 Visualization
 
 <div align="center">
@@ -71,32 +65,11 @@ https://github.com/user-attachments/assets/91158ce5-7a18-4f0b-a420-97be84288f22
   <strong>"Interstellar"</strong>: a demo video with a scene transition every 10 seconds, for a total of 6 transitions.
 </p>
 
-=======
-## 🎬 Visualization
-<div align="center">
-<<<<<<< HEAD
-
- https://github.com/user-attachments/assets/91158ce5-7a18-4f0b-a420-97be84288f22
-
-<p align="center">
-  <strong>"Interstellar"</strong>: a demo video with a scene transition every 10 seconds, for a total of 6 transitions.
-</p>
-
->>>>>>> 1e33823e22886da2f6dcf538c692b197ff2a60cf
-=======
-  
- https://github.com/user-attachments/assets/91158ce5-7a18-4f0b-a420-97be84288f22
- 
-<p align="center">
-  <strong>"Interstellar"</strong>: a demo video with a scene transition every 10 seconds, for a total of 6 transitions.
-</p>
-  
->>>>>>> 1e33823e22886da2f6dcf538c692b197ff2a60cf
-</div>
 
 ## 📰 News
 
-- **[2026/05/13]** Paper released. Code coming soon.
+- **[2026/05/21]** 🎉Code  released.
+- **[2026/05/13]** 🎉Paper released. 
 
 ## 📖 Abstract
 
@@ -115,16 +88,11 @@ With these designs, Echo-Forcing uniformly supports long-horizon generation, smo
 ## 🔍 Method Overview
 
 <p align="center">
-<<<<<<< HEAD
-<<<<<<< HEAD
   <img src="assets/overview.png" width="75%" alt="Echo-Forcing Overview"/>
-=======
-  <img src="assets/overview.png" width="75%" alt="Echo-Forcing Teaser"/>
->>>>>>> 1e33823e22886da2f6dcf538c692b197ff2a60cf
-=======
-  <img src="assets/overview.png" width="75%" alt="Echo-Forcing Teaser"/>
->>>>>>> 1e33823e22886da2f6dcf538c692b197ff2a60cf
 </p>
+
+
+
 
 <p align="center">
   <strong>Overview of the proposed Echo-Forcing framework.</strong>
@@ -134,32 +102,17 @@ With these designs, Echo-Forcing uniformly supports long-horizon generation, smo
 ## 📊 Results
 
 <p align="center">
-<<<<<<< HEAD
-<<<<<<< HEAD
   <img src="assets/long.png" width="75%" alt="Long Video Results"/>
-=======
-  <img src="assets/long.png" width="75%" alt="Echo-Forcing Teaser"/>
->>>>>>> 1e33823e22886da2f6dcf538c692b197ff2a60cf
-=======
-  <img src="assets/long.png" width="75%" alt="Echo-Forcing Teaser"/>
->>>>>>> 1e33823e22886da2f6dcf538c692b197ff2a60cf
 </p>
+
 
 <p align="center">
 Long-video generation on VBench-Long. We compare Echo-Forcing with training-free long-video baselines at 60s and 120s. Echo-Forcing improves visual fidelity and temporal stability while maintaining competitive inference throughput.
 </p>
-
 <p align="center">
-<<<<<<< HEAD
-<<<<<<< HEAD
   <img src="assets/inter.png" width="75%" alt="Interactive Video Results"/>
-=======
-  <img src="assets/inter.png" width="75%" alt="Echo-Forcing Teaser"/>
->>>>>>> 1e33823e22886da2f6dcf538c692b197ff2a60cf
-=======
-  <img src="assets/inter.png" width="75%" alt="Echo-Forcing Teaser"/>
->>>>>>> 1e33823e22886da2f6dcf538c692b197ff2a60cf
 </p>
+
 
 <p align="center">
 Interactive video generation. We evaluate smooth transition, hard cut, and scene recall under both non-fine-tuned and fine-tuned settings. Echo-Forcing consistently improves prompt responsiveness and scene consistency across interaction modes.
