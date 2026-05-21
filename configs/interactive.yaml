@@ -1,0 +1,73 @@
+scene_prompt:
+  default_transition_mode: smooth # Options: smooth, hardcut, recall.
+  default_blocks_per_scene: 21
+  fps: 16
+
+rope:
+  transition_frames: 3
+  max_jump: 45
+  similarity:
+    min_similarity: 0.0
+    max_similarity: 1.0
+    min_jump: 0
+    max_jump: 45
+
+pool:
+  max_size: 64
+
+compress_candidates:
+  mode: score_weighted # Options: token_select, score_weighted.
+  storage_frames: 12
+  source_frames: 12
+  stride: 4
+modes:
+  smooth:
+    use_old_memory: True
+    old_memory_source: compress # Options: select, compress, resink.
+    use_old_recent: true
+    old_recent_frames: 2
+    rope_position_mode: local   
+    use_scene_local_timing: True
+    decay:
+      target: old_memory # Options: old_recent, old_recall, old_memory.
+      strategy: diff # Options: diff, fixed.
+      min_rate: 0.80
+      max_rate: 0.95
+      clear_after_blocks: 5
+    rope_jump:
+      strategy: fixed
+      value: 0
+
+  hardcut:
+    marker: "#"
+    use_old_memory: True
+    old_memory_source: compress # Options: select, compress, resink.
+    use_old_recent: True
+    decay:
+      first_block_weight: 0.8
+      target: old_memory
+      strategy: fixed # Options: diff, fixed.
+      fixed_rate: 1.0
+      clear_after_blocks: 1
+    rope_jump:
+      strategy: fixed
+      value: 45
+
+  recall:
+    marker: "@"
+    match_method: Similar # Options: Similar, IDF.
+    use_old_memory: True
+    old_memory_source: compress # Options: compress, select.
+    # manual_recall_scene_ids: [0, 0, 0, 1, 2, 3]
+    manual_recall_scene_ids: [0, 0, 0, 0, 0, 0]
+    use_old_recent: false
+    decay:
+      target: old_memory
+      strategy: diff # Options: diff, fixed.
+      min_rate: 0.55
+      max_rate: 0.90
+      clear_after_blocks: 5
+    rope_jump:
+      strategy: similarity # Options: fixed, similarity.
+      min_value: 0
+      max_value: 6

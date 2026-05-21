@@ -1,0 +1,186 @@
+import torch
+from dataclasses import dataclass
+from pathlib import Path
+from typing import List, Optional
+from PIL import Image, ImageDraw, ImageFont
+import numpy as np
+import re
+from omegaconf import OmegaConf
+
+
+SCENE_DURATION_PATTERN = re.compile(r'\[(\d+\.?\d*)\s*s([#@])?\]')
+
+
+@dataclass
+class SceneSegment:
+    prompt: str
+    duration_seconds: Optional[float]
+    transition_marker: str
+    transition_mode: str
+
+
+def interactive_config_path() -> str:
+    return str(Path(__file__).resolve().parent.parent / "configs" / "interactive.yaml")
+
+
+def load_interactive_config():
+    return OmegaConf.load(interactive_config_path())
+
+
+def attach_interactive_config(base_config):
+    interactive_config = load_interactive_config()
+    existing_config = getattr(base_config, "interactive", None)
+    if existing_config is not None:
+        interactive_config = OmegaConf.merge(interactive_config, existing_config)
+    return OmegaConf.merge(base_config, OmegaConf.create({"interactive": interactive_config}))
+
+
+def transition_marker_to_mode(marker: str, interactive_config) -> str:
+    if marker == interactive_config.modes.hardcut.marker:
+        return "hardcut"
+    if marker == interactive_config.modes.recall.marker:
+        return "recall"
+    return interactive_config.scene_prompt.default_transition_mode
+
+
+def parse_scene_segments(prompt_text: str, interactive_config) -> List[SceneSegment]:
+    prompt_part = prompt_text.split(';')[0].strip()
+    scene_parts = [part.strip() for part in prompt_part.split('|') if part.strip()]
+    segments: List[SceneSegment] = []
+
+    for scene_part in scene_parts:
+        duration_match = SCENE_DURATION_PATTERN.search(scene_part)
+        duration_seconds = float(duration_match.group(1)) if duration_match else None
+        marker = duration_match.group(2) if duration_match and duration_match.group(2) else ""
+        prompt = SCENE_DURATION_PATTERN.sub("", scene_part).strip()
+        segments.append(
+            SceneSegment(
+                prompt=prompt,
+                duration_seconds=duration_seconds,
+                transition_marker=marker,
+                transition_mode=transition_marker_to_mode(marker, interactive_config),
+            )
+        )
+
+    return segments
+
+
+def parse_total_duration(prompt_text: str, interactive_config) -> Optional[float]:
+    segments = parse_scene_segments(prompt_text, interactive_config)
+    if not segments or any(segment.duration_seconds is None for segment in segments):
+        return None
+    return float(sum(segment.duration_seconds for segment in segments))
+
+
+def parse_action_durations(prompt_text: str, interactive_config) -> Optional[List[float]]:
+    segments = parse_scene_segments(prompt_text, interactive_config)
+    if not segments or any(segment.duration_seconds is None for segment in segments):
+        return None
+    return [float(segment.duration_seconds) for segment in segments]
+
+
+def add_subtitles(video: torch.Tensor, subtitles: List[str], fps: float = 16.0, 
+                  time_durations: Optional[List[float]] = None) -> torch.Tensor:
+    """
+    Add subtitles to a video tensor, aligned with time durations if provided.
+    
+    Args:
+        video: Tensor of shape [b, t, h, w, c] with values in [0, 255]
+        subtitles: List of strings to display as subtitles
+        fps: Frames per second of the video (default: 16.0)
+        time_durations: Optional list of durations in seconds for each subtitle.
+                       If None, frames are divided equally among subtitles.
+    
+    Returns:
+        Video tensor with subtitles rendered on frames
+    """
+    if len(subtitles) == 0:
+        return video
+    
+    b, t, h, w, c = video.shape
+    
+    # Convert to numpy for easier manipulation
+    video_np = video.numpy().astype(np.uint8)
+    
+    # Calculate frame ranges for each subtitle
+    if time_durations is not None and len(time_durations) == len(subtitles):
+        # Use time-based alignment
+        frame_ranges = []
+        current_frame = 0
+        for duration in time_durations:
+            num_frames = int(duration * fps)
+            start_frame = current_frame
+            end_frame = min(current_frame + num_frames, t)
+            frame_ranges.append((start_frame, end_frame))
+            current_frame = end_frame
+    else:
+        # Fall back to equal division
+        frames_per_subtitle = t // len(subtitles)
+        frame_ranges = []
+        for subtitle_idx in range(len(subtitles)):
+            start_frame = subtitle_idx * frames_per_subtitle
+            end_frame = (subtitle_idx + 1) * frames_per_subtitle if subtitle_idx < len(subtitles) - 1 else t
+            frame_ranges.append((start_frame, end_frame))
+    
+    # Process each batch
+    for batch_idx in range(b):
+        # Process each subtitle
+        for subtitle_idx, subtitle in enumerate(subtitles):
+            start_frame, end_frame = frame_ranges[subtitle_idx]
+            
+            # Apply subtitle to frames in this range
+            for frame_idx in range(start_frame, end_frame):
+                # Convert frame to PIL Image
+                frame = video_np[batch_idx, frame_idx]
+                img = Image.fromarray(frame)
+                
+                # Create draw object
+                draw = ImageDraw.Draw(img)
+                
+                # Try to use a default font, fallback to default if not available
+                try:
+                    # Try to use a larger font size
+                    font_size = max(24, h // 20)
+                    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
+                except:
+                    try:
+                        font = ImageFont.load_default()
+                    except:
+                        font = None
+                
+                # Calculate text position (bottom center with padding)
+                text = subtitle.strip()
+                if text:  # Only draw if subtitle is not empty
+                    # Get text bounding box
+                    if font:
+                        bbox = draw.textbbox((0, 0), text, font=font)
+                    else:
+                        bbox = draw.textbbox((0, 0), text)
+                    text_width = bbox[2] - bbox[0]
+                    text_height = bbox[3] - bbox[1]
+                    
+                    # Position text at bottom center with padding
+                    x = (w - text_width) // 2
+                    y = h - text_height - 20  # 20 pixels padding from bottom
+                    
+                    # Draw text with outline for better visibility
+                    # Draw outline (black)
+                    for adj in range(-2, 3):
+                        for adj2 in range(-2, 3):
+                            if adj != 0 or adj2 != 0:
+                                if font:
+                                    draw.text((x + adj, y + adj2), text, font=font, fill=(0, 0, 0))
+                                else:
+                                    draw.text((x + adj, y + adj2), text, fill=(0, 0, 0))
+                    
+                    # Draw main text (white)
+                    if font:
+                        draw.text((x, y), text, font=font, fill=(255, 255, 255))
+                    else:
+                        draw.text((x, y), text, fill=(255, 255, 255))
+                
+                # Convert back to numpy array
+                video_np[batch_idx, frame_idx] = np.array(img)
+    
+    # Convert back to torch tensor
+    return torch.from_numpy(video_np).float()
