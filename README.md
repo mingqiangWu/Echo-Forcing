@@ -213,7 +213,7 @@ python inference.py \
     --end_idx 1
 ```
 
-## 📝 Prompt Format
+## 📝 Prompts
 
 Each line in a prompt file is one generation example. Long-video generation uses a plain prompt without a duration suffix:
 
@@ -221,7 +221,7 @@ Each line in a prompt file is one generation example. Long-video generation uses
 A stylish woman walks down a bustling Tokyo street filled with warm glowing neon and animated city signage. She wears a black leather jacket over a long red dress and black boots, carrying a black purse.
 ```
 
-Interactive generation uses scene segments separated by `|`. Add a duration marker after each scene:
+Interactive generation uses scene segments separated by `|`. Add a duration marker after each scene `[TIME,Mode]` :
 
 - Smooth transition: `[10s]`
 - Hard cut: `[10s#]`
@@ -232,22 +232,25 @@ The examples below split two scenes into two lines for readability. In a prompt 
 Smooth-transition example with two scenes:
 
 ```text
-Static shot, static camera. In a sunlit artist loft with tall industrial windows, a young woman studies an unfinished canvas beside the easel[10s] |
-Static shot, static camera. In the same sunlit artist loft, the same woman begins to paint with smooth confident strokes while warm morning light falls across the room[10s]
+1: Static shot, static camera. In a sunlit artist loft with tall industrial windows, a young woman studies an unfinished canvas beside the easel[10s] 
+
+2: Static shot, static camera. In the same sunlit artist loft, the same woman begins to paint with smooth confident strokes while warm morning light falls across the room[10s]
 ```
 
 Hard-cut example with two scenes:
 
 ```text
-Static shot, static camera. Scene cut to the sunny, crowded Southampton docks with the massive black hull of the Titanic towering in the background. Jack Dawson sprints excitedly toward the gangway[10s#] |
-Static shot, static camera. Scene cut to the ornate Grand Staircase under the glass dome. Jack Dawson stands at the bottom step and gently kisses Rose DeWitt Bukater's hand[10s#]
+1: Static shot, static camera. Scene cut to the sunny, crowded Southampton docks with the massive black hull of the Titanic towering in the background. Jack Dawson sprints excitedly toward the gangway[10s#] 
+
+2: Static shot, static camera. Scene cut to the ornate Grand Staircase under the glass dome. Jack Dawson stands at the bottom step and gently kisses Rose DeWitt Bukater's hand[10s#]
 ```
 
 Scene-recall example with two scenes:
 
 ```text
-Static shot, cinematic realism. On a windswept rooftop garden at sunset high above a dense modern city, a young East Asian woman stands facing the camera and tightens the belt of her coat[10s#] |
-Static shot, cinematic realism. Back on the same windswept rooftop garden at sunset, the same woman crouches beside a planter and picks up a vibrating phone[10s@]
+1: Static shot, cinematic realism. On a windswept rooftop garden at sunset high above a dense modern city, a young East Asian woman stands facing the camera and tightens the belt of her coat[10s#] 
+
+2: Static shot, cinematic realism. Back on the same windswept rooftop garden at sunset, the same woman crouches beside a planter and picks up a vibrating phone[10s@]
 ```
 
 Optional subtitles can be appended after `;`, with one subtitle per scene separated by `|`:
@@ -255,6 +258,19 @@ Optional subtitles can be appended after `;`, with one subtitle per scene separa
 ```text
 scene prompt[10s] | next scene prompt[10s]; First subtitle | Second subtitle
 ```
+
+The interactive evaluation consists of three types of scenarios, each containing 64 prompts. All prompts are stored in **`Echo-Forcing/prompts/inter_prompts`.**
+
+
+
+## 🤖 Scene Routing
+
+ Automatically recalls previous scenes without manual selection. Two matching modes are available:
+
+- **IDF mode** – automatically matches based on term frequency.
+- **Similarity mode** – automatically matches based on embedding similarity.
+
+The matching method can be configured by setting `match_method` in `config/interactive.yaml`.
 
 ## 📧 Contact
 

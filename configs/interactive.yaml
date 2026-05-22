@@ -59,7 +59,7 @@ modes:
     use_old_memory: True
     old_memory_source: compress # Options: compress, select.
     # manual_recall_scene_ids: [0, 0, 0, 1, 2, 3]
-    manual_recall_scene_ids: [0, 0, 0, 0, 0, 0]
+    manual_recall_scene_ids: []
     use_old_recent: false
     decay:
       target: old_memory
