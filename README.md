@@ -120,6 +120,8 @@ Long-video generation on VBench-Long. We compare Echo-Forcing with training-free
 <p align="center">
 Interactive video generation. We evaluate smooth transition, hard cut, and scene recall under both non-fine-tuned and fine-tuned settings. Echo-Forcing consistently improves prompt responsiveness and scene consistency across interaction modes.
 </p>
+
+
 ## 😍 Gradio demo
 
 ```
