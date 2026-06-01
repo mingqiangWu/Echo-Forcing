@@ -211,6 +211,7 @@ class CausalInferencePipeline(torch.nn.Module):
         return_latents: bool = False,
         profile: bool = False,
         low_memory: bool = False,
+        progress_callback=None,
     ) -> torch.Tensor:
         """
         Perform inference on the given noise and text prompts.
@@ -1655,6 +1656,18 @@ class CausalInferencePipeline(torch.nn.Module):
                 _register_scene_pool_compress(scene_index, noise.device)
 
             _set_scene_collection_flags(False, False)
+
+            if progress_callback is not None and is_scene_tail_block:
+                scene_start_frame = int(current_scene_start_frame)
+                scene_end_frame = int(current_start_frame + current_num_frames)
+                progress_callback({
+                    "scene_index": int(scene_index),
+                    "scene_prompt": scene_prompts[scene_index],
+                    "transition_mode": scene_transition_modes[scene_index],
+                    "start_frame": scene_start_frame,
+                    "end_frame": scene_end_frame,
+                    "latents": output[:, scene_start_frame:scene_end_frame].detach(),
+                })
             
             _apply_decay()
             

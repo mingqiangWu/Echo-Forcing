@@ -70,6 +70,7 @@ https://github.com/user-attachments/assets/91158ce5-7a18-4f0b-a420-97be84288f22
 
 ## 📰 News
 
+- **[2026/06/01]** Gradio demo is online.
 - **[2026/05/21]** 🎉Code  released.
 - **[2026/05/13]** 🎉Paper released. 
 
@@ -119,7 +120,13 @@ Long-video generation on VBench-Long. We compare Echo-Forcing with training-free
 <p align="center">
 Interactive video generation. We evaluate smooth transition, hard cut, and scene recall under both non-fine-tuned and fine-tuned settings. Echo-Forcing consistently improves prompt responsiveness and scene consistency across interaction modes.
 </p>
+## 😍 Gradio demo
 
+```
+python demo.py
+```
+
+<img src="README.assets/image-20260601142109627.png" alt="image-20260601142109627" style="zoom: 33%;" />
 
 ## 🛠️ Installation
 
