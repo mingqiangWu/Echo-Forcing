@@ -281,6 +281,17 @@ The interactive evaluation consists of three types of scenarios, each containing
 
 The matching method can be configured by setting `match_method` in `config/interactive.yaml`.
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=mingqiangWu%2FEcho-Forcing&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=mingqiangWu/Echo-Forcing&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=mingqiangWu/Echo-Forcing&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=mingqiangWu/Echo-Forcing&type=date&legend=top-left" />
+ </picture>
+</a>
+
+
 ## 📧 Contact
 
 For questions or suggestions, please open an issue or contact:
