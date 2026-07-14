@@ -18,7 +18,7 @@
     Mingqiang Wu<sup>1,2,*</sup> |
     Weilun Feng<sup>1,2,*</sup> |
     Zhefeng Zhang<sup>3</sup> |
-    Chuanguang Yang<sup>1,&dagger;</sup>
+    Zhulin An<sup>1,&dagger;</sup> 
   </strong>
   <br>
   <strong>
@@ -29,7 +29,7 @@
   </strong>
   <br>
   <strong>
-    Zhulin An<sup>1,&dagger;</sup> |
+    Chuanguang Yang<sup>1,&dagger;</sup> |
     Libo Huang<sup>1</sup> |
     Yongjun Xu<sup>1</sup>
   </strong>
@@ -41,11 +41,11 @@
 </p>
 
 <p align="center">
-  State Key Laboratory of AI Safety, Institute of Computing Technology, Chinese Academy of Sciences<br>
-  University of Chinese Academy of Sciences<br>
-  China University of Mining and Technology, Beijing<br>
-  ETH Zurich<br>
-  City College of New York, City University of New York
+  1.State Key Laboratory of AI Safety, Institute of Computing Technology, Chinese Academy of Sciences<br>
+  2.University of Chinese Academy of Sciences<br>
+  3.China University of Mining and Technology, Beijing<br>
+  4.ETH Zurich<br>
+  5.City College of New York, City University of New York
 </p>
 
 <p align="center">
