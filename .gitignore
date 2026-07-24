@@ -1,9 +1,0 @@
-__pycache__
-*.egg-info
-.cache
-tmp
-wan_models
-checkpoints
-videos
-logs
-.gradio_cache
