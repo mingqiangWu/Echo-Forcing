@@ -70,8 +70,6 @@ https://github.com/user-attachments/assets/91158ce5-7a18-4f0b-a420-97be84288f22
 
 ## 📰 News
 
-- **[2026/06/01]** Gradio demo is online.
-- **[2026/05/21]** 🎉Code  released.
 - **[2026/05/13]** 🎉Paper released. 
 
 ## 📖 Abstract
