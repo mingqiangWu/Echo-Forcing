@@ -69,7 +69,7 @@ https://github.com/user-attachments/assets/91158ce5-7a18-4f0b-a420-97be84288f22
 </div>
 
 ## 📰 News
-
+- **[2026/07/24]** The code has been temporarily withdrawn and will be released soon in a more refined manner.
 - **[2026/05/13]** 🎉Paper released. 
 
 ## 📖 Abstract
