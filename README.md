@@ -58,16 +58,16 @@ Echo-Forcing enables training-free interactive long-video generation with preser
 
 ## 🎥 Video gallery
 
-Click a preview to watch the full MP4. Videos are hosted as [Release assets](https://github.com/mingqiangWu/Echo-Forcing/releases/tag/v0.1.0) to keep the source checkout small.
+Click a preview to play the video in your browser. Download the original MP4 files from the [v0.1.0 Release](https://github.com/mingqiangWu/Echo-Forcing/releases/tag/v0.1.0).
 
 <table>
   <tr>
-    <td align="center" width="50%"><a href="https://github.com/mingqiangWu/Echo-Forcing/releases/download/v0.1.0/long-video.mp4"><img src="assets/previews/long-video.jpg" alt="Long video generation: woman in a red dress" width="100%"><br><strong>Long video generation · red dress</strong> ▶</a></td>
-    <td align="center" width="50%"><a href="https://github.com/mingqiangWu/Echo-Forcing/releases/download/v0.1.0/smooth-transition.mp4"><img src="assets/previews/smooth-transition.jpg" alt="Smooth transition example" width="100%"><br><strong>Smooth transition</strong> ▶</a></td>
+    <td align="center" width="50%"><a href="https://github.com/user-attachments/assets/4bc34606-5690-4ee1-a9bd-e8881cd2a49f"><img src="assets/previews/long-video.jpg" alt="Long video generation: woman in a red dress" width="100%"><br><strong>Long video generation · red dress</strong> ▶</a></td>
+    <td align="center" width="50%"><a href="https://github.com/user-attachments/assets/9952fb5f-b5db-4a85-9eeb-dc5df1e247b9"><img src="assets/previews/smooth-transition.jpg" alt="Smooth transition example" width="100%"><br><strong>Smooth transition</strong> ▶</a></td>
   </tr>
   <tr>
-    <td align="center" width="50%"><a href="https://github.com/mingqiangWu/Echo-Forcing/releases/download/v0.1.0/hard-cut.mp4"><img src="assets/previews/hard-cut.jpg" alt="Hard cut example" width="100%"><br><strong>Hard cut</strong> ▶</a></td>
-    <td align="center" width="50%"><a href="https://github.com/mingqiangWu/Echo-Forcing/releases/download/v0.1.0/scene-recall.mp4"><img src="assets/previews/scene-recall.jpg" alt="Scene recall example" width="100%"><br><strong>Scene recall</strong> ▶</a></td>
+    <td align="center" width="50%"><a href="https://github.com/user-attachments/assets/0016308b-eb30-4c52-ada6-22f4816d50a9"><img src="assets/previews/hard-cut.jpg" alt="Hard cut example" width="100%"><br><strong>Hard cut</strong> ▶</a></td>
+    <td align="center" width="50%"><a href="https://github.com/user-attachments/assets/7ff96d78-0285-4037-bc52-b8499e0f0d3c"><img src="assets/previews/scene-recall.jpg" alt="Scene recall example" width="100%"><br><strong>Scene recall</strong> ▶</a></td>
   </tr>
 </table>
 
