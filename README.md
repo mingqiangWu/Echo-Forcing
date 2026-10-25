@@ -1,5 +1,4 @@
-<h1 align="center">🎥 Echo-Forcing:A Scene Memory Framework for Interactive Long Video Generation</h1>
-<p align="center"><sub><b></b></sub></p>
+<h1 align="center">🎥 Echo-Forcing: A Scene Memory Framework for Interactive Long Video Generation</h1>
 <p align="center">
   <a href="https://arxiv.org/html/2605.16003v1">
     <img src="https://img.shields.io/badge/arXiv-Paper-red?style=flat-square" alt="Paper"/>
@@ -57,20 +56,26 @@ Echo-Forcing enables training-free interactive long-video generation with preser
 </p>
 
 
-## 🎥 Visualization
+## 🎥 Video gallery
 
-<div align="center">
+Click a preview to watch the full MP4. Videos are hosted as [Release assets](https://github.com/mingqiangWu/Echo-Forcing/releases/tag/v0.1.0) to keep the source checkout small.
 
-https://github.com/user-attachments/assets/91158ce5-7a18-4f0b-a420-97be84288f22
-
-<p align="center">
-  <strong>"Interstellar"</strong>: a demo video with a scene transition every 10 seconds, for a total of 6 transitions.
-</p>
-</div>
+<table>
+  <tr>
+    <td align="center" width="50%"><a href="https://github.com/mingqiangWu/Echo-Forcing/releases/download/v0.1.0/long-video.mp4"><img src="assets/previews/long-video.jpg" alt="Long video generation: woman in a red dress" width="100%"><br><strong>Long video generation · red dress</strong> ▶</a></td>
+    <td align="center" width="50%"><a href="https://github.com/mingqiangWu/Echo-Forcing/releases/download/v0.1.0/smooth-transition.mp4"><img src="assets/previews/smooth-transition.jpg" alt="Smooth transition example" width="100%"><br><strong>Smooth transition</strong> ▶</a></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><a href="https://github.com/mingqiangWu/Echo-Forcing/releases/download/v0.1.0/hard-cut.mp4"><img src="assets/previews/hard-cut.jpg" alt="Hard cut example" width="100%"><br><strong>Hard cut</strong> ▶</a></td>
+    <td align="center" width="50%"><a href="https://github.com/mingqiangWu/Echo-Forcing/releases/download/v0.1.0/scene-recall.mp4"><img src="assets/previews/scene-recall.jpg" alt="Scene recall example" width="100%"><br><strong>Scene recall</strong> ▶</a></td>
+  </tr>
+</table>
 
 ## 📰 News
-- **[2026/07/24]** The code has been temporarily withdrawn and will be released soon in a more refined manner.
-- **[2026/05/13]** 🎉Paper released. 
+
+- **[2026/10/25]** 🚀 Code re-released with the prompt-switch flicker fix, improved transition timing, and streaming inference with a live Gradio demo.
+- **[2026/07/24]** The code was temporarily withdrawn for refinement.
+- **[2026/05/13]** 🎉 Paper released.
 
 ## 📖 Abstract
 
@@ -120,17 +125,33 @@ Interactive video generation. We evaluate smooth transition, hard cut, and scene
 </p>
 
 
-## 😍 Gradio demo
+## 🖥️ Streaming demo
 
-```
-python demo.py
+Install the streaming UI dependencies after the base environment:
+
+```bash
+pip install -r requirements-streaming.txt
+bash run_streaming.sh
 ```
 
-<img src="README.assets/image-20260601142109627.png" alt="image-20260601142109627" style="zoom: 33%;" />
+Open `http://127.0.0.1:1325` in your browser. The video player and Director Console remain visible side by side on desktop; narrow screens stack them. The default launcher selects GPU 0 for generation and a second GPU with at least 16 GiB free for VAE decoding. For a single GPU, run `CUDA_VISIBLE_DEVICES=0 bash run_streaming.sh`. To choose a pair, run `CUDA_VISIBLE_DEVICES=0,1 bash run_streaming.sh`.
+
+<p align="center"><img src="assets/gradio-demo.png" width="90%" alt="Echo-Forcing streaming Gradio demo"/></p>
+
+The UI accepts a scene plan with duration markers and can switch prompts at the next generation-block boundary. The live player updates as MP4 chunks arrive. Completed runs save `final.mp4` and `metrics.json` under `.streaming_cache/<run-id>/`; generated outputs are ignored by Git. See [STREAMING.md](STREAMING.md) for CLI usage and details.
+
+### Code entry points
+
+| Task | Entry point |
+| --- | --- |
+| Long video generation | `bash inference.sh` or `python inference.py` |
+| Smooth / hard / recall offline generation | `bash inference_smooth.sh`, `bash inference_hard.sh`, `bash inference_recall.sh` |
+| Streaming command line | `python inference_stream.py` |
+| Streaming Gradio UI | `bash run_streaming.sh` or `python app.py` |
 
 ## 🛠️ Installation
 
-Create a conda environment and install dependencies:
+Create a conda environment and install the base dependencies:
 
 ```bash
 conda create -n self_forcing python=3.10 -y
@@ -139,6 +160,8 @@ pip install -r requirements.txt
 pip install flash-attn --no-build-isolation
 python setup.py develop
 ```
+
+FlashAttention is optional at runtime: if its installed build is unavailable, attention falls back to PyTorch SDPA. `ffmpeg` is needed to encode streaming MP4 segments.
 
 ## 🚀 Quick Start
 
@@ -220,75 +243,29 @@ python inference.py \
     --end_idx 1
 ```
 
-## 📝 Prompts
+## 📝 Prompts and transitions
 
-Each line in a prompt file is one generation example. Long-video generation uses a plain prompt without a duration suffix:
+Each line in a prompt file is one generation example. Long-video generation uses a plain prompt. Interactive plans use scene segments separated by `|`, with a duration marker at the end of each scene:
 
-```text
-A stylish woman walks down a bustling Tokyo street filled with warm glowing neon and animated city signage. She wears a black leather jacket over a long red dress and black boots, carrying a black purse.
-```
+- `[10s]`: smooth transition after the scene
+- `[10s#]`: hard cut after the scene
+- `[10s@]`: scene recall after the scene
 
-Interactive generation uses scene segments separated by `|`. Add a duration marker after each scene `[TIME,Mode]` :
-
-- Smooth transition: `[10s]`
-- Hard cut: `[10s#]`
-- Scene-recall frame: `[10s@]`
-
-The examples below split two scenes into two lines for readability. In a prompt file, keep each complete example on one line.
-
-Smooth-transition example with two scenes:
+Example:
 
 ```text
-1: Static shot, static camera. In a sunlit artist loft with tall industrial windows, a young woman studies an unfinished canvas beside the easel[10s] 
-
-2: Static shot, static camera. In the same sunlit artist loft, the same woman begins to paint with smooth confident strokes while warm morning light falls across the room[10s]
+A woman studies an unfinished canvas in a sunlit loft[10s] | The same woman begins painting at the easel[10s#] | She returns to the loft and steps back to admire the painting[10s@]
 ```
 
-Hard-cut example with two scenes:
+The marker describes the transition **after** that scene. For a live prompt switch in Gradio, choose the transition used to enter the new scene. Optional subtitles can follow `;`, with one subtitle per scene separated by `|`.
 
-```text
-1: Static shot, static camera. Scene cut to the sunny, crowded Southampton docks with the massive black hull of the Titanic towering in the background. Jack Dawson sprints excitedly toward the gangway[10s#] 
+## 🤖 Scene routing
 
-2: Static shot, static camera. Scene cut to the ornate Grand Staircase under the glass dome. Jack Dawson stands at the bottom step and gently kisses Rose DeWitt Bukater's hand[10s#]
-```
+Echo-Forcing can match a new prompt to an earlier scene using IDF or similarity matching. Configure `interactive.recall.match_method` in [`configs/interactive.yaml`](configs/interactive.yaml). Scene routing is part of inference; offline recall-accuracy evaluation scripts are not included.
 
-Scene-recall example with two scenes:
+## 📜 License and acknowledgements
 
-```text
-1: Static shot, cinematic realism. On a windswept rooftop garden at sunset high above a dense modern city, a young East Asian woman stands facing the camera and tightens the belt of her coat[10s#] 
-
-2: Static shot, cinematic realism. Back on the same windswept rooftop garden at sunset, the same woman crouches beside a planter and picks up a vibrating phone[10s@]
-```
-
-Optional subtitles can be appended after `;`, with one subtitle per scene separated by `|`:
-
-```text
-scene prompt[10s] | next scene prompt[10s]; First subtitle | Second subtitle
-```
-
-The interactive evaluation consists of three types of scenarios, each containing 64 prompts. All prompts are stored in **`Echo-Forcing/prompts/inter_prompts`.**
-
-
-
-## 🤖 Scene Routing
-
- Automatically recalls previous scenes without manual selection. Two matching modes are available:
-
-- **IDF mode** – automatically matches based on term frequency.
-- **Similarity mode** – automatically matches based on embedding similarity.
-
-The matching method can be configured by setting `match_method` in `config/interactive.yaml`.
-
-## Star History
-
-<a href="https://www.star-history.com/?repos=mingqiangWu%2FEcho-Forcing&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=mingqiangWu/Echo-Forcing&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=mingqiangWu/Echo-Forcing&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=mingqiangWu/Echo-Forcing&type=date&legend=top-left" />
- </picture>
-</a>
-
+Echo-Forcing's original contributions are released under the [MIT License](LICENSE). The repository also contains adapted Self-Forcing and Wan2.1 code under Apache 2.0; see [third-party notices](THIRD_PARTY_NOTICES.md) and the [Apache license text](licenses/Apache-2.0.txt).
 
 ## 📧 Contact
 
